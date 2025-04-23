@@ -21,7 +21,7 @@ uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 if uploaded_file:
     # Display image
     image = Image.open(uploaded_file).convert("RGB")  # ensure it's RGB
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+    st.image(image, caption="Uploaded Image", use_container_width=True)
 
     if st.button("Run Detection"):
         st.write("🧠 Detecting watermark logos...")
@@ -40,4 +40,4 @@ if uploaded_file:
             # Convert BGR (from OpenCV) to RGB (for Streamlit)
             bgr_img = results[0].plot()
             rgb_img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
-            st.image(rgb_img, caption="Detected Watermarks", use_column_width=True)
+            st.image(rgb_img, caption="Detected Watermarks", use_container_width=True)
