@@ -41,7 +41,7 @@ MODEL_PATH = "best.pt"
 model = YOLO(MODEL_PATH)
 
 # Upload image
-uploaded_file = st.file_uploader("📤 Upload an image (JPG/PNG)", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("📤 Upload an image here", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
     # Check file size
