@@ -82,4 +82,4 @@ if uploaded_file:
 
 # Footer
 st.markdown("---")
-st.markdown("<center><small>© 2025 Watermark Logo Detector | Built with 💙 using YOLOv8 & Streamlit</small></center>", unsafe_allow_html=True)
+st.markdown("<center><small>© 2025 Watermark Logo Detector | Built using YOLOv8 & Streamlit</small></center>", unsafe_allow_html=True)
