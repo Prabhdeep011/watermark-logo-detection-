@@ -51,11 +51,7 @@ if uploaded_file:
         image = Image.open(uploaded_file).convert("RGB")
         st.image(image, caption="📷 Uploaded Image", use_container_width=True)
 
-        col1, col2 = st.columns([1, 3])
-        with col1:
-            detect_btn = st.button("🚀 Run Detection")
-        with col2:
-            st.empty()
+        detect_btn = st.button("🚀 Run Detection")
 
         if detect_btn:
             st.info("Processing image...")
