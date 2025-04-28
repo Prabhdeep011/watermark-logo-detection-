@@ -2,7 +2,6 @@ import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
 import cv2
-import numpy as np
 import tempfile
 
 # Set page configuration
@@ -65,8 +64,8 @@ if uploaded_file:
                 image.save(tmp.name)
                 temp_img_path = tmp.name
 
-            # Run YOLOv8 detection with internal fixed confidence
-            results = model.predict(source=temp_img_path, conf=0.25, save=False)  # Fixed at 0.25 confidence
+            # Run YOLOv8 detection (no extra parameters)
+            results = model.predict(source=temp_img_path, save=False)
 
             boxes = results[0].boxes
             if len(boxes) == 0:
