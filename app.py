@@ -2,6 +2,7 @@ import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
 import cv2
+import numpy as np
 import tempfile
 
 # Set page configuration
@@ -51,7 +52,14 @@ if uploaded_file:
         image = Image.open(uploaded_file).convert("RGB")
         st.image(image, caption="📷 Uploaded Image", use_container_width=True)
 
-        detect_btn = st.button("🚀 Run Detection")
+        # Confidence threshold slider
+        confidence = st.slider("🎯 Confidence Threshold", 0.1, 1.0, 0.25, 0.05)
+
+        col1, col2 = st.columns([1, 3])
+        with col1:
+            detect_btn = st.button("🚀 Run Detection")
+        with col2:
+            st.empty()
 
         if detect_btn:
             st.info("Processing image...")
@@ -60,8 +68,8 @@ if uploaded_file:
                 image.save(tmp.name)
                 temp_img_path = tmp.name
 
-            # Run YOLOv8 detection (no extra parameters)
-            results = model.predict(source=temp_img_path, save=False)
+            # Run YOLOv8 detection
+            results = model.predict(source=temp_img_path, conf=confidence, save=False)
 
             boxes = results[0].boxes
             if len(boxes) == 0:
