@@ -52,9 +52,6 @@ if uploaded_file:
         image = Image.open(uploaded_file).convert("RGB")
         st.image(image, caption="📷 Uploaded Image", use_container_width=True)
 
-        # Confidence threshold slider
-        confidence = st.slider("🎯 Confidence Threshold", 0.1, 1.0, 0.25, 0.05)
-
         col1, col2 = st.columns([1, 3])
         with col1:
             detect_btn = st.button("🚀 Run Detection")
@@ -68,8 +65,8 @@ if uploaded_file:
                 image.save(tmp.name)
                 temp_img_path = tmp.name
 
-            # Run YOLOv8 detection
-            results = model.predict(source=temp_img_path, conf=confidence, save=False)
+            # Run YOLOv8 detection with internal fixed confidence
+            results = model.predict(source=temp_img_path, conf=0.25, save=False)  # Fixed at 0.25 confidence
 
             boxes = results[0].boxes
             if len(boxes) == 0:
